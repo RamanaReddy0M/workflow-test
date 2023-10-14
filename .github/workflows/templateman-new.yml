@@ -1,4 +1,4 @@
-name: 🤖 Test TemplateMan
+name: 🤖 TemplateMan
 
 on:
   push:
@@ -28,47 +28,31 @@ jobs:
           git clone https://github.com/RamanaReddy0M/templateman.git
           cd templateman/templateman-cli/cmd/tmc
           go install
-
+    
       - name: clone nuclei-templates
         working-directory: /home/runner/work/
         run: |
           git clone https://github.com/projectdiscovery/nuclei-templates.git
-          cd nuclei-templates
-          tmc -t "http/technologies" -mr -e -d
-
-      
-      # - name: Debug with tmate session
-      #   uses: mxschmitt/action-tmate@v3
-  
-      - name: Debug templates dir
-        working-directory: /home/runner/work/workflow-test
-        run: |
-          sudo ls /home/runner/work/nuclei-templates/http/technologies
-
 
       - name: Run TemplateMan
+        id: tmc
         working-directory: /home/runner/work/nuclei-templates
-        id: tmco
         run: |
-          pwd
-          tmc -h
-          echo http/technologies | tmc -mr -e -d
+          echo http/technologies | tmc -mr -e
+          ls /home/runner/work/nuclei-templates/http/technologies
           git status -s | wc -l | xargs -I {} echo CHANGES={} >> $GITHUB_OUTPUT
 
       - name: Commit files
-        if: steps.tmco.outputs.CHANGES > 0
+        if: steps.tmc.outputs.CHANGES > 0
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git commit --allow-empty -m "TemplateMan Update [$(date)] :robot:" -a
-      
-      - name: Debug with tmate session
-        uses: mxschmitt/action-tmate@v3
 
-      # - name: Push changes
-      #   if: steps.tmco.outputs.CHANGES > 0
-      #   run: |
-      #     git pull --rebase
-      #     git push origin ${{ github.ref }}
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   - name: Push changes
+    #     if: steps.tmc.outputs.CHANGES > 0
+    #     run: |
+    #       git pull --rebase
+    #       git push origin ${{ github.ref }}
+    #     env:
+    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
