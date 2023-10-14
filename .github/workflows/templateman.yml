@@ -48,8 +48,9 @@ jobs:
         id: tmc
         run: |
           sudo ls http/technologies
-          tmc -t http/technologies -mr -e
-          tmc -t http/technologies -mr -e
+          tmc
+          pwd
+          tmc -t http/technologies -mr -e -d
           git status -s | wc -l | xargs -I {} echo CHANGES={} >> $GITHUB_OUTPUT
 
       - name: Commit files
