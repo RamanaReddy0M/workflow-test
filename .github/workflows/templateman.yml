@@ -34,24 +34,20 @@ jobs:
         run: |
           git clone https://github.com/projectdiscovery/nuclei-templates.git
       
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+      # - name: Debug with tmate session
+      #   uses: mxschmitt/action-tmate@v3
   
       - name: Debug templates dir
         working-directory: /home/runner/work/workflow-test
         run: |
-          pwd
-          ls /home/runner/work/nuclei-templates/nuclei-templates/http/technologies
-          cd /home/runner/work/nuclei-templates/
-          git status -s | wc -l | xargs -I {} echo CHANGES={} >> $GITHUB_OUTPUT
+          sudo ls /home/runner/work/nuclei-templates/http/technologies
 
-          
 
       - name: Run TemplateMan
         id: tmc
         run: |
-          tmc -t /home/runner/work/nuclei-templates/nuclei-templates/http/technologies -mr -e
-          ls /home/runner/work/nuclei-templates/nuclei-templates/http/technologies
+          tmc -t /home/runner/work/nuclei-templates/http/technologies -mr -e
+          sudo ls /home/runner/work/nuclei-templates/http/technologies
           git status -s | wc -l | xargs -I {} echo CHANGES={} >> $GITHUB_OUTPUT
 
       - name: Commit files
@@ -60,11 +56,14 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git commit --allow-empty -m "TemplateMan Update [$(date)] :robot:" -a
+      
+      - name: Debug with tmate session
+        uses: mxschmitt/action-tmate@v3
 
-      - name: Push changes
-        if: steps.tmc.outputs.CHANGES > 0
-        run: |
-          git pull --rebase
-          git push origin ${{ github.ref }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Push changes
+      #   if: steps.tmc.outputs.CHANGES > 0
+      #   run: |
+      #     git pull --rebase
+      #     git push origin ${{ github.ref }}
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
