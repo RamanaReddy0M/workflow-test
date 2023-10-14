@@ -28,11 +28,14 @@ jobs:
           git clone https://github.com/RamanaReddy0M/templateman.git
           cd templateman/templateman-cli/cmd/tmc
           go install
-
+  
       - name: Debug templates dir
         run: |
+          pwd
           ls /home/runner/work/nuclei-templates/nuclei-templates/http/technologies
           git status -s | wc -l | xargs -I {} echo CHANGES={} >> $GITHUB_OUTPUT
+
+          
 
       - name: Run TemplateMan
         id: tmc
