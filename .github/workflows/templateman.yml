@@ -45,8 +45,9 @@ jobs:
 
       - name: Run TemplateMan
         id: tmc
+        working-directory: /home/runner/work/nuclei-templates
         run: |
-          tmc -t /home/runner/work/nuclei-templates/http/technologies -mr -e
+          sduo tmc -t /home/runner/work/nuclei-templates/http/technologies -mr -e
           sudo ls /home/runner/work/nuclei-templates/http/technologies
           git status -s | wc -l | xargs -I {} echo CHANGES={} >> $GITHUB_OUTPUT
 
