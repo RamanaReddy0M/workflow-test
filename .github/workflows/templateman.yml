@@ -29,7 +29,7 @@ jobs:
         
       - name: Install TemplateMan CLI Client
         run: |
-          git clone https://${{ secrets.ACCESS_TOKEN }}@github.com/RamanaReddy0M/templateman.git
+          git clone https://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@github.com/RamanaReddy0M/templateman.git
           cd templateman/templateman-cli/cmd/tmc
           go install
 
