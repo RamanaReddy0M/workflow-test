@@ -47,9 +47,8 @@ jobs:
         working-directory: /home/runner/work/nuclei-templates
         id: tmco
         run: |
-          tmc
           pwd
-          tmc -version
+          tmc -h
           tmc -t http/technologies -mr -e -d
           git status -s | wc -l | xargs -I {} echo CHANGES={} >> $GITHUB_OUTPUT
 
