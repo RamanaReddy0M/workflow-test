@@ -13,23 +13,19 @@ jobs:
   templateman:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref }}
           fetch-depth: 0
 
       - name: Set up Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v4
         with:
           go-version: 1.20.x
 
-      - name: Debug ACCESS_TOKEN
-        run: echo "${{ secrets.ACCESS_TOKEN }}"
-        
       - name: Install TemplateMan CLI Client
         run: |
-          git clone https://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@github.com/RamanaReddy0M/templateman.git
+          git config --global url."https://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@github".insteadOf https://github
+          git clone https://github.com/projectdiscovery/templateman.git
           cd templateman/templateman-cli/cmd/tmc
           go install
 
@@ -38,7 +34,7 @@ jobs:
         run: |
           tmc -t /home/runner/work/nuclei-templates/nuclei-templates/http/technologies -mr -e
           ls /home/runner/work/nuclei-templates/nuclei-templates/http/technologies
-          git status -s | wc -l | xargs -I {} echo CHANGES={} >> $GITHUB_ENV
+          git status -s | wc -l | xargs -I {} echo CHANGES={} >> $GITHUB_OUTPUT
 
       - name: Commit files
         if: steps.tmc.outputs.CHANGES > 0
