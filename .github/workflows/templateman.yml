@@ -24,7 +24,7 @@ jobs:
 
       - name: Install TemplateMan CLI Client
         run: |
-          git config --global url."https://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@github".insteadOf https://github
+          git config --global url."https://${{ secrets.ACCESS_TOKEN }}@github".insteadOf https://github
           git clone https://github.com/projectdiscovery/templateman.git
           cd templateman/templateman-cli/cmd/tmc
           go install
