@@ -29,6 +29,11 @@ jobs:
           cd templateman/templateman-cli/cmd/tmc
           go install
 
+      - name: Debug templates dir
+        run: |
+          ls /home/runner/work/nuclei-templates/nuclei-templates/http/technologies
+          git status -s | wc -l | xargs -I {} echo CHANGES={} >> $GITHUB_OUTPUT
+
       - name: Run TemplateMan
         id: tmc
         run: |
