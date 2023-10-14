@@ -35,9 +35,11 @@ jobs:
           git clone https://github.com/projectdiscovery/nuclei-templates.git
   
       - name: Debug templates dir
+        working-directory: /home/runner/work/workflow-test
         run: |
           pwd
           ls /home/runner/work/nuclei-templates/nuclei-templates/http/technologies
+          cd /home/runner/work/nuclei-templates/
           git status -s | wc -l | xargs -I {} echo CHANGES={} >> $GITHUB_OUTPUT
 
           
