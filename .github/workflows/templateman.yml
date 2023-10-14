@@ -33,6 +33,9 @@ jobs:
         working-directory: /home/runner/work/
         run: |
           git clone https://github.com/projectdiscovery/nuclei-templates.git
+      
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
   
       - name: Debug templates dir
         working-directory: /home/runner/work/workflow-test
