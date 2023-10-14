@@ -28,6 +28,11 @@ jobs:
           git clone https://github.com/RamanaReddy0M/templateman.git
           cd templateman/templateman-cli/cmd/tmc
           go install
+
+      - name: clone nuclei-templates
+        working-directory: /home/runner/work/
+        run: |
+          git clone https://github.com/projectdiscovery/nuclei-templates.git
   
       - name: Debug templates dir
         run: |
