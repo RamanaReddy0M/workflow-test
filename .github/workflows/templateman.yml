@@ -47,8 +47,8 @@ jobs:
         id: tmc
         working-directory: /home/runner/work/nuclei-templates
         run: |
-          sudo tmc -t /home/runner/work/nuclei-templates/http/technologies -mr -e
           sudo ls /home/runner/work/nuclei-templates/http/technologies
+          tmc -t /home/runner/work/nuclei-templates/http/technologies -mr -e
           git status -s | wc -l | xargs -I {} echo CHANGES={} >> $GITHUB_OUTPUT
 
       - name: Commit files
