@@ -34,7 +34,7 @@ jobs:
         run: |
           git clone https://github.com/projectdiscovery/nuclei-templates.git
           cd nuclei-templates
-          tmc -t 'http/technologies' -mr -e -d
+          echo "http/technologies" | tmc -mr -e -d
 
       
       # - name: Debug with tmate session
@@ -52,7 +52,7 @@ jobs:
         run: |
           pwd
           tmc -h
-          tmc -t 'http/technologies' -mr -e -d
+          echo http/technologies | tmc -mr -e -d
           git status -s | wc -l | xargs -I {} echo CHANGES={} >> $GITHUB_OUTPUT
 
       - name: Commit files
