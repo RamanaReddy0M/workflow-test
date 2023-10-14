@@ -34,7 +34,7 @@ jobs:
         run: |
           git clone https://github.com/projectdiscovery/nuclei-templates.git
           cd nuclei-templates
-          echo "http/technologies" | tmc -mr -e -d
+          tmc -t "http/technologies" -mr -e -d
 
       
       # - name: Debug with tmate session
