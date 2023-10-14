@@ -1,0 +1,57 @@
+name: 🤖 TemplateMan
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**.yaml'
+  workflow_dispatch:
+
+jobs:
+  templateman:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.20.x
+
+      - name: Install TemplateMan CLI Client
+        run: |
+          git config --global url."https://${{ secrets.ACCESS_TOKEN }}@github".insteadOf https://github
+          git clone https://github.com/RamanaReddy0M/templateman.git
+          cd templateman/templateman-cli/cmd/tmc
+          go install
+    
+      - name: clone nuclei-templates
+        working-directory: /home/runner/work/
+        run: |
+          git clone https://github.com/projectdiscovery/nuclei-templates.git
+
+      - name: Run TemplateMan
+        id: tmc
+        working-directory: /home/runner/work/nuclei-templates
+        run: |
+          echo http/technologies | tmc -mr -e
+          ls /home/runner/work/nuclei-templates/http/technologies
+          git status -s | wc -l | xargs -I {} echo CHANGES={} >> $GITHUB_OUTPUT
+
+      - name: Commit files
+        if: steps.tmc.outputs.CHANGES > 0
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit --allow-empty -m "TemplateMan Update [$(date)] :robot:" -a
+
+    #   - name: Push changes
+    #     if: steps.tmc.outputs.CHANGES > 0
+    #     run: |
+    #       git pull --rebase
+    #       git push origin ${{ github.ref }}
+    #     env:
+    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
