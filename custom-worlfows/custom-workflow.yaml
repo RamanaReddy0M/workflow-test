@@ -4,6 +4,5 @@ info:
   name: Artica Web Proxy Security Checks
   author: dwisiswant0,pdteam
   description: A simple workflow that runs all Artica Web Proxy related nuclei templates on a given target.
-  
 workflows:
   - template: custom-templates/test.yaml
