@@ -18,7 +18,7 @@ jobs:
           uses: projectdiscovery/nuclei-action@main
           with:
             target: https://example.com
-            workflows: nuclei-worlfows
+            workflows: custom-worlfows/custom-workflow.yaml
         
         # - name: Debug with tmate session
         #   uses: mxschmitt/action-tmate@v3
