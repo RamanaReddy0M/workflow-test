@@ -1,0 +1,24 @@
+name: 🤖 Nuclei Action
+
+on:
+  push:
+    branches:
+      - nuclei-action-workflow
+    paths:
+      - '**.yaml'
+  workflow_dispatch:
+
+jobs:
+  templateman:
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v2
+        
+        - name: Nuclei - Vulnerability Scan
+          uses: projectdiscovery/nuclei-action@main
+          with:
+            target: https://example.com
+            workflows: nuclei-worlfows
+        
+        # - name: Debug with tmate session
+        #   uses: mxschmitt/action-tmate@v3
