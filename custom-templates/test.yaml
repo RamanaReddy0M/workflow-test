@@ -1,0 +1,47 @@
+id: template-id
+
+info:
+  name: Template Name
+  author: Template Author
+  severity: info
+  description: description
+  reference:
+    - https://
+  metadata:
+    max-request: 2
+  tags: tags
+
+variables:
+  first_1: "{{rand_int(8, 20)}}"
+  first_2: "{{rand_int(100, 101)}}"
+
+http:
+  - raw:
+      - |-
+        POST /{{Path}} HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/json
+
+        {"pageNum":1,"pageSize":{{PageSize}}}
+
+
+    payloads:
+      Path:
+        - 'api/queryPageList'
+      PageSize:
+        - "{{first_1}}"
+        - "{{first_2}}"
+    attack: clusterbomb
+
+    matchers-condition: and
+    matchers:
+      # - type: dsl
+      #   dsl:
+      #     - "contains(header, 'application/json')"
+      #     - "status_code == 200"
+      #     - "contains(body, 'pageSize') && contains(body, 'pageNum') && contains(body, 'success') && contains(body, 'code') && contains(body, 'message')"
+      #   condition: and
+
+      - type: dsl
+        dsl:
+          - "len(body_1) != 0"
