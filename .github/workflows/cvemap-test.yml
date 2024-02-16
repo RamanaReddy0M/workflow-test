@@ -1,4 +1,4 @@
-name: Run CVEmap
+name: 🤖 Run CVEmap
 
 on:
   workflow_dispatch:
@@ -29,3 +29,6 @@ jobs:
         env:
           PATH: ${{ github.workspace }}/go/bin:$PATH
           PDCP_API_KEY: ${{ secrets.PDCP_API_KEY }}
+      
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
