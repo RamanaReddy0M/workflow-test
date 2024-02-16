@@ -24,7 +24,8 @@ jobs:
         run: |
           echo "Running CVEmap with JSON output"
           cvemap -json
-          echo "Running CVEmap without JSON"
+            echo "Running CVEmap without JSON output"
           cvemap -l 5
+        env:
           PATH: ${{ github.workspace }}/go/bin:$PATH
           PDCP_API_KEY: ${{ secrets.PDCP_API_KEY }}
