@@ -17,7 +17,7 @@ jobs:
       
       # Install cvemap
       - name: Install CVEmap
-        run: go install github.com/projectdiscovery/cvemap/cmd/cvemap@0bfced3
+        run: go install github.com/projectdiscovery/cvemap/cmd/cvemap@fa6eb96
       
       # Run cvemap with JSON output and specific criteria
       - name: Run CVEmap with ID filter
