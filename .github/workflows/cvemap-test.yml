@@ -22,8 +22,9 @@ jobs:
       # Run cvemap with JSON output and specific criteria
       - name: Run CVEmap with ID filter
         run: |
+          echo "Running CVEmap with JSON output"
           cvemap -json
-          cvemap -json -id " "
-        env:
+          echo "Running CVEmap without JSON"
+          cvemap -l 5
           PATH: ${{ github.workspace }}/go/bin:$PATH
           PDCP_API_KEY: ${{ secrets.PDCP_API_KEY }}
