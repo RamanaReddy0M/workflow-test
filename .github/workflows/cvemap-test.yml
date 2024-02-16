@@ -18,14 +18,5 @@ jobs:
       # Run cvemap with JSON output and specific criteria
       - name: Run CVEmap with ID filter
         run: |
-          ./cvemap -json -id <ID_VALUE> # Replace <ID_VALUE> with your specific ID
-          ./cvemap -json -v "<VENDOR>" # Replace "<VENDOR>" with your desired vendor
-          # Add additional cvemap commands as needed
-
-      # Optional: Store scan results
-      - name: Store scan results (optional)
-        uses: actions/upload-artifact@v3
-        with:
-          name: cvemap-results
-          path: <PATH_TO_RESULTS> # Replace with the path to your output files
-
+          ./cvemap -json
+          ./cvemap -json -id " "
