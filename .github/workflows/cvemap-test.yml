@@ -8,15 +8,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
+      
+      # Set up Go 1.21 environment
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.21'
+      
+      # Install cvemap
+      - name: Install CVEmap
+        run: go install github.com/projectdiscovery/cvemap/cmd/cvemap@latest
+      
       # Set up secrets
       - name: Set PDCP API key
         env:
           PDCP_API_KEY: ${{ secrets.PDCP_API_KEY }}
         run: echo "PDCP_API_KEY=${PDCP_API_KEY}"
-
+      
       # Run cvemap with JSON output and specific criteria
       - name: Run CVEmap with ID filter
         run: |
-          ./cvemap -json
-          ./cvemap -json -id " "
+          cvemap -json
+          cvemap -json -id " "
+        env:
+          PATH: ${{ github.workspace }}/go/bin:$PATH
