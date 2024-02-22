@@ -1,12 +1,6 @@
 name: 🤖 TemplateMan
 
 on:
-  push:
-    branches:
-      - main
-      - templateman-workflow
-    paths:
-      - '**.yaml'
   workflow_dispatch:
 
 jobs:

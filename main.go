@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"runtime"
 
 	"github.com/projectdiscovery/gologger"
 	"golang.org/x/term"
@@ -11,17 +12,13 @@ import (
 
 func main() {
 	fmt.Println("int(os.Stdin.Fd()): ", int(os.Stdin.Fd()))
-	fmt.Printf("[*] Enter PDCP API Key (type 'exit' to abort): ")
-
-	// Open /dev/tty for direct terminal input, bypassing stdin.
-	tty, err := os.Open("/dev/tty")
-	if err != nil {
-		gologger.Fatal().Msgf("Could not open /dev/tty: %s\n", err)
+	var apiKeyBytes []byte
+	var err error
+	if runtime.GOOS == "windows" {
+		apiKeyBytes, err = readPasswordFromWindows("[*] Enter PDCP API Key (exit to abort): ")
+	} else {
+		apiKeyBytes, err = readPasswordFromUnix("[*] Enter PDCP API Key (exit to abort): ")
 	}
-	defer tty.Close()
-
-	// Use term.ReadPassword to securely read the input from the terminal.
-	apiKeyBytes, err := term.ReadPassword(int(tty.Fd()))
 	if err != nil {
 		gologger.Fatal().Msgf("Could not read input from terminal: %s\n", err)
 	}
@@ -34,4 +31,19 @@ func main() {
 	}
 
 	// Proceed with using the apiKey...
+}
+
+func readPasswordFromUnix(prompt string) ([]byte, error) {
+	fmt.Print(prompt)
+	tty, err := os.Open("/dev/tty")
+	if err != nil {
+		return nil, err
+	}
+	defer tty.Close()
+	return term.ReadPassword(int(tty.Fd()))
+}
+
+func readPasswordFromWindows(prompt string) ([]byte, error) {
+	fmt.Print(prompt)
+	return term.ReadPassword(int(os.Stdin.Fd()))
 }
