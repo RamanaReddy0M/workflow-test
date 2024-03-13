@@ -9,13 +9,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  templateman:
+  nuclei-scan:
     runs-on: ubuntu-latest
     steps:
         - uses: actions/checkout@v2
         
         - name: Nuclei - Vulnerability Scan
-          uses: projectdiscovery/nuclei-action@change_installation_path
+          uses: projectdiscovery/nuclei-action@main
           with:
             target: https://example.com
             workflows: custom-worlfows/custom-workflow.yaml
