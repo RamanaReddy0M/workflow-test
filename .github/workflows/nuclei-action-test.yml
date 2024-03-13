@@ -10,21 +10,21 @@ jobs:
         - uses: actions/checkout@v2
         
         - name: Nuclei - Vulnerability Scan
-          uses:  projectdiscovery/nuclei-action@main
+          uses:  felipesaezreyes/nuclei-action@fix-flags-regex
           with:
             target: https://example.com
             flags: "-rate-limit 5"
             workflows: custom-worlfows/custom-workflow.yaml
 
         - name: Nuclei - Vulnerability Scan 2
-          uses:  projectdiscovery/nuclei-action@main
+          uses:  felipesaezreyes/nuclei-action@fix-flags-regex
           with:
             target: https://example.com
             flags: "-rate-limit 10 -max-retries 2"
             workflows: custom-worlfows/custom-workflow.yaml
 
         - name: Nuclei - Vulnerability Scan 3
-          uses:  projectdiscovery/nuclei-action@main
+          uses:  felipesaezreyes/nuclei-action@fix-flags-regex
           with:
             target: https://example.com
             flags: "-rate-limit 5 -max-retries 2"
