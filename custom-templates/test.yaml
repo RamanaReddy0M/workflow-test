@@ -11,6 +11,7 @@ requests:
   - method: GET
     path:
       - "{{BaseURL}}"
+      - "{{BaseURL}}/login"
 
     matchers:
       - type: status
