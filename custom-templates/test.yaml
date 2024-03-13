@@ -2,7 +2,7 @@ id: basic-200-status-check
 
 info:
   name: Check for 200 OK status
-  author: yourname
+  author: ramana
   severity: info
   description: Checks if the target returns a 200 OK status code.
   tags: status,200
