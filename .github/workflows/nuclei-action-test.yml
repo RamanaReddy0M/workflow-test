@@ -13,7 +13,7 @@ jobs:
           uses:  projectdiscovery/nuclei-action@main
           with:
             target: https://example.com
-            flags: "-rate-limit 10 -max-retries 10"
+            flags: "-rate-limit 10 -mhe 10"
             templates: custom-templates/test.yaml
         
         - name: Nuclei - Vulnerability Scan - with single flag (test)
@@ -27,14 +27,14 @@ jobs:
           uses:  felipesaezreyes/nuclei-action@fix-flags-regex
           with:
             target: https://example.com
-            flags: "-rate-limit 5 -max-retries 2"
+            flags: "-rate-limit 5 -mhe 2"
             templates: custom-templates/test.yaml
 
         - name: Nuclei - Vulnerability Scan - with multiple flags (test)
           uses:  felipesaezreyes/nuclei-action@fix-flags-regex
           with:
             target: https://example.com
-            flags: "-rate-limit 10 -max-retries 2"
+            flags: "-rate-limit 10 -mhe 2"
             templates: custom-templates/test.yaml
 
         # - name: Debug with tmate session
