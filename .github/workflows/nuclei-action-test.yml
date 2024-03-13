@@ -10,13 +10,13 @@ jobs:
         - uses: actions/checkout@v2
         
         - name: Nuclei - Vulnerability Scan
-          uses: projectdiscovery/nuclei-action@main
+          uses:  PittyXu/nuclei-action@main
           with:
             target: https://example.com
             workflows: custom-worlfows/custom-workflow.yaml
 
         - name: Nuclei - Vulnerability Scan 2
-          uses: projectdiscovery/nuclei-action@main
+          uses:  PittyXu/nuclei-action@main
           with:
             target: https://example.com
             workflows: custom-worlfows/custom-workflow.yaml
