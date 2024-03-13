@@ -1,11 +1,6 @@
 name: 🤖 Nuclei Action
 
 on:
-  push:
-    branches:
-      - nuclei-action-workflow
-    paths:
-      - '**.yaml'
   workflow_dispatch:
 
 jobs:
