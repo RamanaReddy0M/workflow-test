@@ -9,26 +9,26 @@ jobs:
     steps:
         - uses: actions/checkout@v2
         
-        - name: Nuclei - Vulnerability Scan
+        - name: Nuclei - Vulnerability Scan - with single flag
           uses:  felipesaezreyes/nuclei-action@fix-flags-regex
           with:
             target: https://example.com
             flags: "-rate-limit 5"
-            workflows: custom-worlfows/custom-workflow.yaml
+            templates: custom-templates/test.yaml
 
-        - name: Nuclei - Vulnerability Scan 2
+        - name: Nuclei - Vulnerability Scan - with multiple flags
           uses:  felipesaezreyes/nuclei-action@fix-flags-regex
           with:
             target: https://example.com
             flags: "-rate-limit 10 -max-retries 2"
-            workflows: custom-worlfows/custom-workflow.yaml
+            templates: custom-templates/test.yaml
 
-        - name: Nuclei - Vulnerability Scan 3
+        - name: Nuclei - Vulnerability Scan - with multiple flags 2
           uses:  felipesaezreyes/nuclei-action@fix-flags-regex
           with:
             target: https://example.com
             flags: "-rate-limit 5 -max-retries 2"
-            workflows: custom-worlfows/custom-workflow.yaml
-        
+            templates: custom-templates/test.yaml
+                    
         # - name: Debug with tmate session
         #   uses: mxschmitt/action-tmate@v3
