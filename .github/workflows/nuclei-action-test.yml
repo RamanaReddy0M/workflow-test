@@ -12,8 +12,8 @@ jobs:
         - name: Nuclei - Vulnerability Scan
           uses:  projectdiscovery/nuclei-action@main
           with:
-            target: https://qa.redacted.com
-            flags: "-rate-limit 10"
+            target: https://example.com
+            flags: "-rate-limit 5"
             workflows: custom-worlfows/custom-workflow.yaml
         
         # - name: Debug with tmate session
