@@ -15,6 +15,20 @@ jobs:
             target: https://example.com
             flags: "-rate-limit 5"
             workflows: custom-worlfows/custom-workflow.yaml
+
+        - name: Nuclei - Vulnerability Scan 2
+          uses:  projectdiscovery/nuclei-action@main
+          with:
+            target: https://example.com
+            flags: "-rate-limit 10 -max-retries 2"
+            workflows: custom-worlfows/custom-workflow.yaml
+
+        - name: Nuclei - Vulnerability Scan 3
+          uses:  projectdiscovery/nuclei-action@main
+          with:
+            target: https://example.com
+            flags: "-rate-limit 5 -max-retries 2"
+            workflows: custom-worlfows/custom-workflow.yaml
         
         # - name: Debug with tmate session
         #   uses: mxschmitt/action-tmate@v3
