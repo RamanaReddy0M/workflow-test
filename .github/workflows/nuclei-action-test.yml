@@ -12,7 +12,8 @@ jobs:
         - name: Nuclei - Vulnerability Scan
           uses:  felipesaezreyes/nuclei-action@nodev20
           with:
-            target: https://example.com
+            target: https://qa.redacted.com
+            flags: "-rate-limit 5"
             workflows: custom-worlfows/custom-workflow.yaml
         
         # - name: Debug with tmate session
