@@ -10,7 +10,7 @@ jobs:
         - uses: actions/checkout@v2
 
         - name: Nuclei - Vulnerability Scan - with projectdiscovery/main (existing)
-          uses:  fisehara/nuclei-action@merge-github-report-config-files
+          uses:  fisehara/nuclei-action@fisehara/merge-github-report-config-files
           with:
             target: https://example.com
             report-config: custom-templates/issues.yml
