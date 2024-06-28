@@ -2,3 +2,6 @@ github:
   duplicate-issue-check: true
   severity-as-label: true
   issue-label: '<Nuclei Scan Vulnerability>'
+  username: GITHUB_ACTOR,
+  owner: GITHUB_REPOSITORY_OWNER,token,
+  "project-name": GITHUB_REPOSITORY,
