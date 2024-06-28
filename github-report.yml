@@ -3,9 +3,9 @@ github:
   severity-as-label: true
   issue-label: '<Nuclei Scan Vulnerability>'
 
-  username: ${{ secrets.GITHUB_ACTOR }}
-  owner: ${{ secrets.GITHUB_REPOSITORY_OWNER }}
-  token: ${{ secrets.GITHUB_TOKEN }}
-  project-name: ${{ secrets.GITHUB_REPOSITORY }}
+  # username: ${{ secrets.GITHUB_ACTOR }}
+  # owner: ${{ secrets.GITHUB_REPOSITORY_OWNER }}
+  # token: ${{ secrets.GITHUB_TOKEN }}
+  # project-name: ${{ secrets.GITHUB_REPOSITORY }}
 
   
