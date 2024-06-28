@@ -1,6 +1,6 @@
 github:
   duplicate-issue-check: true
-  severity-as-label: true
+  severity-as-label: false
   issue-label: '<Nuclei Scan Vulnerability>'
   token: ${{ secrets.GITHUB_TOKEN }}
   username: GITHUB_ACTOR,
