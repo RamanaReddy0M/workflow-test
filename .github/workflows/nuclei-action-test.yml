@@ -13,6 +13,7 @@ jobs:
           uses:  projectdiscovery/nuclei-action@main
           with:
             target: https://example.com
+            flags: "-v -debug"
             templates: custom-templates/test.yaml
             report-config: github-report.yml # without github username,token config fields...
           continue-on-error: true
@@ -21,6 +22,7 @@ jobs:
           uses:  fisehara/nuclei-action@fisehara/merge-github-report-config-files
           with:
             target: https://example.com
+            flags: "-v -debug"
             templates: custom-templates/test.yaml
             report-config: github-report.yml # without github owner,token config fields...
             github-token: ${{ secrets.GITHUB_TOKEN }}
