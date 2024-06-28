@@ -13,7 +13,7 @@ jobs:
           uses:  fisehara/nuclei-action@fisehara/merge-github-report-config-files
           with:
             target: https://example.com
-            github-report: true
+            report-config: custom-templates/issues.yml
             templates: custom-templates/test.yaml
             github-token: ${{ secrets.GITHUB_TOKEN }}
 
