@@ -13,29 +13,23 @@ jobs:
           uses:  projectdiscovery/nuclei-action@main
           with:
             target: https://example.com
-            flags: "-rate-limit 10 -mhe 10"
             templates: custom-templates/test.yaml
+            report-config: github-report.yml # without github username,token config fields...
+
+        - name: Nuclei - Vulnerability Scan - with fisehara/merge-github-report-config-files (new)
+          uses:  fisehara/nuclei-action@fisehara/merge-github-report-config-files
+          with:
+            target: https://example.com
+            templates: custom-templates/test.yaml
+            report-config: github-report.yml # without github owner,token config fields...
+            github-token: ${{ secrets.GITHUB_TOKEN }}
         
-        - name: Nuclei - Vulnerability Scan - with single flag (test)
-          uses:  felipesaezreyes/nuclei-action@fix-flags-regex
-          with:
-            target: https://example.com
-            flags: "-rate-limit 5"
-            templates: custom-templates/test.yaml
-
-        - name: Nuclei - Vulnerability Scan - with multiple flags 2 (test)
-          uses:  felipesaezreyes/nuclei-action@fix-flags-regex
-          with:
-            target: https://example.com
-            flags: "-rate-limit 5 -mhe 2"
-            templates: custom-templates/test.yaml
-
-        - name: Nuclei - Vulnerability Scan - with multiple flags (test)
-          uses:  felipesaezreyes/nuclei-action@fix-flags-regex
-          with:
-            target: https://example.com
-            flags: "-rate-limit 10 -mhe 2"
-            templates: custom-templates/test.yaml
+        # - name: Nuclei - Vulnerability Scan - with multiple flags (test)
+        #   uses:  felipesaezreyes/nuclei-action@fix-flags-regex
+        #   with:
+        #     target: https://example.com
+        #     flags: "-rate-limit 10 -mhe 2"
+        #     templates: custom-templates/test.yaml
 
         # - name: Debug with tmate session
         #   uses: mxschmitt/action-tmate@v3

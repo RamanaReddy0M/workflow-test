@@ -1,4 +1,0 @@
-github:
-  duplicate-issue-check: true
-  severity-as-label: false
-  issue-label: '<Nuclei Scan Vulnerability>'
