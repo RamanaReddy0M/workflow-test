@@ -5,9 +5,9 @@ info:
   author: ramana
   severity: info
   description: Checks if the target returns a 200 OK status code.
-  tags: status,200
+  tags: status
 
-requests:
+http:
   - method: GET
     path:
       - "{{BaseURL}}"
