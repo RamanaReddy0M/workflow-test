@@ -15,6 +15,7 @@ jobs:
             target: https://example.com
             report-config: true
             templates: custom-templates/test.yaml
+            github-token: ${{ secrets.GITHUB_TOKEN }}
 
         # - name: Debug with tmate session
         #   uses: mxschmitt/action-tmate@v3
