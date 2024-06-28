@@ -1,4 +1,4 @@
-name: 🤖 Nuclei Action
+name: 🤖 Nuclei Action Test
 
 on:
   workflow_dispatch:
@@ -15,6 +15,7 @@ jobs:
             target: https://example.com
             templates: custom-templates/test.yaml
             report-config: github-report.yml # without github username,token config fields...
+          continue-on-error: true
 
         - name: Nuclei - Vulnerability Scan - with fisehara/merge-github-report-config-files (new)
           uses:  fisehara/nuclei-action@fisehara/merge-github-report-config-files
