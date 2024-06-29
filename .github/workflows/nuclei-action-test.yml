@@ -3,6 +3,10 @@ name: 🤖 Nuclei Action Test
 on:
   workflow_dispatch:
 
+
+permissions:
+  issues: write
+
 jobs:
   nuclei-scan:
     runs-on: ubuntu-latest
