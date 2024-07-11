@@ -5,6 +5,7 @@ on:
 
 permissions:
   issues: write
+  security-events: write
 
 jobs:
   nuclei-scan:
@@ -17,12 +18,16 @@ jobs:
         with:
           target: https://example.com
           flags: "-v -debug"
-          sarif-export: custom-templates/nuclei.sarif
           templates: custom-templates/test.yaml
           report-config: github-report.yml
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Debug with tmate session
+        uses: mxschmitt/action-tmate@v3
 
       - name: GitHub Security Dashboard Alerts update
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: custom-templates/nuclei.sarif
+          sarif_file: nuclei.sarif
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
