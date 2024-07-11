@@ -19,6 +19,7 @@ jobs:
           flags: "-v -debug"
           templates: custom-templates/test.yaml
           report-config: github-report.yml
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: GitHub Security Dashboard Alerts update
         uses: github/codeql-action/upload-sarif@v3
