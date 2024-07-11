@@ -31,6 +31,12 @@ jobs:
             report-config: github-report.yml # without github owner,token config fields...
             github-token: ${{ secrets.GITHUB_TOKEN }}
         
+        - name: Create GitHub Issue
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          run: |
+            curl -X POST -H "Authorization: token $GITHUB_TOKEN" -d '{"title":"New Issue","body":"This is a new issue created by the workflow."}' https://api.github.com/repos/RamanaReddy0M/workflow-test/issues
+      
         # - name: Nuclei - Vulnerability Scan - with multiple flags (test)
         #   uses:  felipesaezreyes/nuclei-action@fix-flags-regex
         #   with:
