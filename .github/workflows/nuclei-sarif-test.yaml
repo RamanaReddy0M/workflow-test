@@ -17,6 +17,7 @@ jobs:
         with:
           target: https://example.com
           flags: "-v -debug"
+          sarif-export: custom-templates/nuclei.sarif
           templates: custom-templates/test.yaml
           report-config: github-report.yml
           github-token: ${{ secrets.GITHUB_TOKEN }}
