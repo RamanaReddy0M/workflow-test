@@ -12,28 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Nuclei - Vulnerability Scan 1
-        id: nuclei_scan_1
-        uses: projectdiscovery/nuclei-action@issue-85-sarif-file-not-exist
-        with:
-          target: https://example.com
-          flags: "-v -debug"
-          templates: custom-templates/no-match-test.yaml
-          report-config: github-report.yml
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: GitHub Security Dashboard Alerts update for scan 1
-        if: steps.nuclei_scan_1.outputs.sarif_exists == 'true'
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: nuclei.sarif
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
       - name: Nuclei - Vulnerability Scan 2
-        id: nuclei_scan_2
-        uses: projectdiscovery/nuclei-action@issue-85-sarif-file-not-exist
+        id: nuclei_scan
+        uses: projectdiscovery/nuclei-action@issue-53-replace-func-undefined-err
         with:
             target: https://example.com
             flags: "-v -debug"
@@ -41,8 +23,8 @@ jobs:
             report-config: github-report.yml
             github-token: ${{ secrets.GITHUB_TOKEN }}
     
-      - name: GitHub Security Dashboard Alerts update for scan 2
-        if: steps.nuclei_scan_2.outputs.sarif_exists == 'true'
+      - name: GitHub Security Dashboard Alerts update
+        if: steps.nuclei_scan.outputs.sarif_exists == 'true'
         uses: github/codeql-action/upload-sarif@v3
         with:
             sarif_file: nuclei.sarif
