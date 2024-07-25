@@ -17,7 +17,7 @@ jobs:
             flags: "-v -debug"
             templates: custom-templates/test.yaml
             
-      - name: Nuclei - Vulnerability Scan
+      - name: Nuclei - Vulnerability Scan with github-report
         id: nuclei_scan_report_true
         uses: projectdiscovery/nuclei-action@issue-fix-report-config-file-err
         with:
@@ -26,7 +26,7 @@ jobs:
             templates: custom-templates/test.yaml
             github-report: true
 
-      - name: Nuclei - Vulnerability Scan
+      - name: Nuclei - Vulnerability Scan with report-config
         id: nuclei_scan_report
         uses: projectdiscovery/nuclei-action@issue-fix-report-config-file-err
         with:
