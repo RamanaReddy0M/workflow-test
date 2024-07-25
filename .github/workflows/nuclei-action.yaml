@@ -3,6 +3,10 @@ name: 🤖 Nuclei - Vulnerability Scan
 on:
     workflow_dispatch:
 
+permissions:
+    issues: write
+    security-events: write
+
 jobs:
   nuclei-scan:
     runs-on: ubuntu-latest
@@ -25,6 +29,7 @@ jobs:
             flags: "-v -debug"
             templates: custom-templates/test.yaml
             github-report: true
+            github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Nuclei - Vulnerability Scan with report-config
         id: nuclei_scan_report
@@ -34,5 +39,7 @@ jobs:
             flags: "-v -debug"
             templates: custom-templates/test.yaml
             report-config: github-report.yml
+            github-token: ${{ secrets.GITHUB_TOKEN }}
+
 
     
