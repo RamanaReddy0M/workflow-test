@@ -11,7 +11,7 @@ jobs:
 
       - name: Nuclei - Vulnerability Scan
         id: nuclei_scan
-        uses: projectdiscovery/nuclei-action@issue-53-replace-func-undefined-err
+        uses: projectdiscovery/nuclei-action@issue-fix-report-config-file-err
         with:
             target: https://example.com
             flags: "-v -debug"
